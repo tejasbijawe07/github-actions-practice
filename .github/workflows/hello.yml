@@ -15,7 +15,7 @@ jobs:
         run: echo "Hello from Github Actions!"
 
       - name: Intentional Failure
-        run: exit 1
+        run: echo "Fixed!"
 
       - name: Print Current Date and Time
         run: date
