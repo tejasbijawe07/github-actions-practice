@@ -1,0 +1,31 @@
+name: Artifact Demo
+
+on:
+  push:
+    paths:
+      - ".github/workflows/artifact-demo.yml"
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create reports directory
+        run: mkdir -p reports
+
+      - name: Generate test report
+        run: |
+          echo "Test Report" > reports/test-report.txt
+          echo "----------------" >> reports/test-report.txt
+          echo "Tests Passed: 10" >> reports/test-report.txt
+          echo "Tests Failed: 0" >> reports/test-report.txt
+          echo "Build Status: SUCCESS" >> reports/test-report.txt
+
+      - name: Display report
+        run: cat reports/test-report.txt
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: reports/test-report.txt
