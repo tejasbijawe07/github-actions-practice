@@ -1,0 +1,23 @@
+name: Log Analyzer CI
+
+on:
+  push:
+    paths:
+      - ".github/workflows/log-analyzer.yml"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-log-analyzer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x scripts/log_analyzer.sh
+
+      - name: Run log analyzer
+        run: ./scripts/log_analyzer.sh logs/application.log
